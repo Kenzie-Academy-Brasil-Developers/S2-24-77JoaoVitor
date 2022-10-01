@@ -1,7 +1,8 @@
--- Aqui você deve colocar os códigos SQL referentes às
--- Simulações de um CRUD
+INSERT INTO clientes 
+	(nome,lealdade)
+	VALUES
+	('Georgia', 0);
 
--- Criação
 INSERT INTO pedidos
 	(status, cliente_id)
 	VALUES 
@@ -16,22 +17,6 @@ SELECT
 	FROM 
 	pedidos;
 	
-
-		
-	
-
--- Leitura
-SELECT
-	*
-	FROM 
-	produtos;
-SELECT
-	*
-	FROM 
-	pedidos;
-	
--- 1)
-
 INSERT INTO produtos_pedidos
 (pedido_id, produto_id)
 	VALUES 
@@ -41,7 +26,7 @@ INSERT INTO produtos_pedidos
 	(11, 8),
 	(11, 8);
 
-    SELECT 
+SELECT 
 	*
 	FROM 
 	clientes cl
@@ -53,15 +38,39 @@ INSERT INTO produtos_pedidos
  	produtos pr ON pr.id = pp.produto_id
  	WHERE 
  	cl.nome = 'Georgia';
+ 
+ SELECT 
+ 	SUM(pr.pts_de_lealdade) AS lealdade_total
+	FROM 
+	produtos pr
+	JOIN
+	produtos_pedidos pp ON pr.id = pp.produto_id
+	JOIN
+	pedidos pe ON pe.id = pp.pedido_id
+	JOIN
+	clientes cl ON cl.id = pe.cliente_id
+	WHERE
+	cl.nome = 'Georgia';
 
--- Atualização
+UPDATE 
+	clientes
+	SET
+		lealdade = 48
+	WHERE 
+		clientes.nome = 'Georgia'
+	RETURNING
+		*;
+	
+DELETE FROM 
+	clientes
+	WHERE
+		clientes.nome = 'Marcelo';
+
+
+	
+	
+
+
+ 
 		
--- 1)
-
-
-
--- Deleção
-
--- 1)
-
-
+	
